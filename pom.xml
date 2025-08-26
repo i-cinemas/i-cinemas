@@ -10,10 +10,11 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>gateway-service</module>-->
+        <module>icinema-gateway</module>
 <!--        <module>movie-service</module>-->
-        <module>theatre-service</module>
+<!--        <module>theatre-service</module>-->
         <module>icinemas-model</module>
+        <module>user-service</module>
     </modules>
 
     <properties>

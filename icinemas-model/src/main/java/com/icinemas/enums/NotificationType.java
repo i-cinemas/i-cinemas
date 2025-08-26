@@ -1,6 +1,6 @@
 package com.icinemas.enums;
 
-public enum NotificationType {
+public enum  NotificationType {
 
         BOOKING_CONFIRMED("I-Cinemas Show Booking Confirmed", "booking-confirmation", "Your I-Cinemas show booking has been confirmed, enjoy the show !!"),
         BOOKING_CANCELLED("I-Cinemas Show Booking Cancelled", "booking-cancelled", "Your booking has been cancelled"),
