@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: icinemas-gateway
+
+
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user_public
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/user/register
+
+            - id: user_protected
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/user/**
+              filters:
+                - name: JwtAuthFilter
+                  args:
+                    allowedRoles:
+                      - USER
+                      - ADMIN
+
+            - id: movie_protected
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v1/movie/**
+              filters:
+                - name: JwtAuthFilter
+                  args:
+                    allowedRoles:
+                      - ADMIN
+
+            # Theatre Create/Update/Delete - Admin only
+            - id: theatre_admin_protected
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/theatre/**
+                - Method=POST,PUT,DELETE
+              filters:
+                - JwtAuthFilter=ADMIN
+
+            # Theatre Read (GET) - Admin & User
+            - id: theatre_all_protected
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/theatre/**
+                - Method=GET
+              filters:
+                - JwtAuthFilter=ADMIN,USER
+
+
+
+jwt:
+  secret: YourSuperSecretKeyThatShouldBeLongEnough1234567890
+
+server:
+  .port: 8080

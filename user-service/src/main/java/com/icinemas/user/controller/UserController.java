@@ -20,7 +20,7 @@ public class UserController {
         return ResponseEntity.ok(jwtToken);
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         return userService.registerUser(user);
 
